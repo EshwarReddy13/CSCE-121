@@ -1,30 +1,12 @@
 #include <fstream>
 #include <iostream>
-#include <string>
-#include <tuple>
-#include <vector>
+#include <iomanip>
 using namespace std;
+
 int main(){
-   string a,b,c,d;
-   vector<string> loc;
-   vector<string> mon;
-   vector<string> date;
-   vector<string> temp;
-   ifstream file("esh.txt");
-   if(file.is_open()){
-      while(!file.eof()){
-         file >> a >> b >> c >> d;
-
-         loc.push_back(a);
-         mon.push_back(b);
-         date.push_back(c);
-         temp.push_back(d);
-      }
-   }
-
-   //cout << a;
-   for(int i=0;i<loc.size();i++){
-      cout << temp[i] << endl;
-   }
+   double a = 10.20000;
+   int b =a/1;
+   cout << to_string(b) << endl;
+   cout << a << std::setprecision(2) << endl;
    return 0;
 }

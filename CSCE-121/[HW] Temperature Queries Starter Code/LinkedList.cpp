@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include "LinkedList.h"
@@ -23,11 +24,34 @@ LinkedList::~LinkedList() {
 
 LinkedList::LinkedList(const LinkedList& source) {
 	// Implement this function
+	if (source.head == nullptr){
+		head = nullptr;
+		tail = nullptr;
+		return;
+	}
+	Node* temp = source.head;
+	Node* node = nullptr;
+	while(temp != nullptr){
+		node = new Node();
+		node->data = temp->data;
+		node->next = nullptr;
+		if (head == nullptr){
+			head = node;
+			tail = node;
+		}else{
+			tail->next = node;
+			tail = node;
+		}
+		temp = temp->next;
+	}
 }
 
 LinkedList& LinkedList::operator=(const LinkedList& source) {
 	// Implement this function
-	return *this;
+	free(this);
+	LinkedList* node = new LinkedList;
+	*node = source;
+	return *node;
 }
 
 void LinkedList::insert(string location, int year, int month, double temperature) {
@@ -123,20 +147,25 @@ Node* LinkedList::getHead() const {
 		return this->head;
 	}
 }
-
+string remove(string a){
+	while (a[a.size() - 1] == '0' || a[a.size() - 1] == '.'){
+		a.resize(a.size() - 1);
+	}
+	return a;
+}
 string LinkedList::print() const {
 	string outputString;
 	// Implement this function
-	// Node* node = head;
-	// while(node != nullptr){
-	// 	outputString += node->data.id + " ";
-	// 	outputString += to_string(node->data.year) + " ";
-	// 	outputString += to_string(node->data.month) + " ";
-	// 	outputString += to_string(node->data.temperature);
-	// 	outputString += "\n";
-	// 	node = node->next;
-	// }
-	// return outputString;
+	Node* node = head;
+	while(node != nullptr){
+		outputString += node->data.id + " ";
+		outputString += to_string(node->data.year) + " ";
+		outputString += to_string(node->data.month) + " ";
+		outputString += remove(to_string(node->data.temperature));
+		outputString += "\n";
+		node = node->next;
+	}
+	return outputString;
 }
 
 ostream& operator<<(ostream& os, const LinkedList& ll) {
