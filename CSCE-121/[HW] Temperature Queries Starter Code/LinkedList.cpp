@@ -11,18 +11,18 @@ LinkedList::LinkedList():head(nullptr),tail(nullptr){}
 
 LinkedList::~LinkedList() {
 	// Implement this function
-	Node* current = head;
-    Node* next;
-    while (current != nullptr) {
-        next = current->next;
-        delete current;
-        current = next;
-    }
+	Node *now = head;
+	Node *later = nullptr;
+	while(now != nullptr){
+		later = now;
+		now = now->next;
+		delete(later);
+	}
 	head = nullptr;
 	tail = nullptr;
 }
 
-LinkedList::LinkedList(const LinkedList& source) {
+LinkedList::LinkedList(const LinkedList& source): head(nullptr), tail(nullptr){
 	// Implement this function
 	if (source.head == nullptr){
 		head = nullptr;
@@ -48,10 +48,28 @@ LinkedList::LinkedList(const LinkedList& source) {
 
 LinkedList& LinkedList::operator=(const LinkedList& source) {
 	// Implement this function
-	free(this);
-	LinkedList* node = new LinkedList;
-	*node = source;
-	return *node;
+	this->clear();
+
+	if (source.head == nullptr){
+		head = tail = nullptr;
+		return *this;
+	}
+	Node* temp = source.head;
+	Node* node = nullptr;
+	while (temp != nullptr){
+		node = new Node();
+		node->data = temp->data;
+		node->next = nullptr;
+		if (head == nullptr){
+			head = node;
+			tail = node;
+		}else{
+			tail->next = node;
+			tail = node;
+		}
+		temp = temp->next;
+	}
+	return *this;
 }
 
 void LinkedList::insert(string location, int year, int month, double temperature) {
@@ -156,15 +174,13 @@ string remove(string a){
 string LinkedList::print() const {
 	string outputString;
 	// Implement this function
+	ostringstream cout;
 	Node* node = head;
-	while(node != nullptr){
-		outputString += node->data.id + " ";
-		outputString += to_string(node->data.year) + " ";
-		outputString += to_string(node->data.month) + " ";
-		outputString += remove(to_string(node->data.temperature));
-		outputString += "\n";
+	while (node != nullptr){
+		cout << node->data.id << " " << node->data.year << " " << node->data.month << " " << node->data.temperature << endl;
 		node = node->next;
 	}
+	outputString = cout.str();
 	return outputString;
 }
 

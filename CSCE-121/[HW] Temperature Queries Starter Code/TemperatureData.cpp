@@ -7,7 +7,7 @@
 
 #include "TemperatureData.h"
 
-TemperatureData::TemperatureData() {} //initialize everything
+TemperatureData::TemperatureData(): id(), year(), month(), temperature() {} //initialize everything
 
 TemperatureData::TemperatureData(string id, int year, int month, double temperature): id(id), year(year), month(month), temperature(temperature) {} //initialize everything
 

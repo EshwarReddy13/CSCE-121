@@ -71,10 +71,11 @@ int SumBetween(int low, int high) {
   if(low > high){
     throw std::invalid_argument("wrong input");
   }else{
-    throw std::overflow_error("too large or small");
-    // for(int i =low;i<high+1;i++){
-    //   value += i;
-    // }
+    //throw std::overflow_error("too large or small");
+    for(int i =low;i<high+1;i++){
+      if(i-INT32_MAX)
+      value += i;
+    }
   }
   return value;
 }

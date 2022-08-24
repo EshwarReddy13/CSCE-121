@@ -11,6 +11,11 @@ struct Node {
 	Node(); // remember to initialize next to nullptr
 	Node(std::string id, int year, int month, double temperature); // remember to initialize next to nullptr
 
+	//To remove warnings
+	Node(const Node&) = delete;
+	Node(Node&&) = delete;
+	Node& operator=(const Node&) = delete;
+	Node& operator=(Node&&) = delete;
 	// This operator will allow you to just ask if a node is smaller than another
 	//  rather than looking at all of the location, temperature and date information
 	bool operator<(const Node& b);

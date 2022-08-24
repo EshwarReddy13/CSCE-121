@@ -6,7 +6,7 @@
 using namespace std;
 
 // Default constructor/destructor. Modify them if you need to.
-TemperatureDatabase::TemperatureDatabase() {}
+TemperatureDatabase::TemperatureDatabase(): records() {}
 TemperatureDatabase::~TemperatureDatabase() {}
 
 void TemperatureDatabase::loadData(const string& filename) {
@@ -31,14 +31,13 @@ void TemperatureDatabase::loadData(const string& filename) {
 	string location;
 	int year;
 	int month;
-	double testmonth;
 	double temperature;
 	ifstream file(filename);
 	if(file.is_open()){
 		string a;
 		string line;
 		int i=0;
-		int test;
+		double test;
 		while(getline(file,line)){
 			if(line.size()==0){
 				cout << "Error: Other invalid input" << endl;

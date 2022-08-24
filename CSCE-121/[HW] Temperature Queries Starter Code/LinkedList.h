@@ -29,6 +29,7 @@ public:
 	// Clear the content of this linked list
 	void clear();
 
+	std::string remove(string a);
 	// The functions below are written already. Do not modify them.
 	std::string print() const;
 
